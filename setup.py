@@ -8,7 +8,7 @@ if sys.version_info < (3,4):
 setup(
   name = 'iot_plot',
   packages = ['iot_plot'],
-  version = "0.1",
+  version = "0.3",
   description = 'Remote plotting library',
   license = 'MIT',
   author = 'Bernhard Boser',

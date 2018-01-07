@@ -53,7 +53,7 @@ def main():
     mp = PlotClient(mqtt)
 
     # give the series a unique name (in case you create multiple plots)
-    SERIES = "sinusoid"
+    SERIES = "sinusoid" 
 
     # data column names
     mp.new_series(SERIES, 'time', 'cos', 'sin', 'sin*cos')
