@@ -144,11 +144,11 @@ def main():
 
     print("Server started ... waiting for data!")
     # blocking; see MQTTClient for non-blocking alternatives
-    mqtt.loop_forever()
+    try:
+        mqtt.loop_forever()
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        pass
+    main()

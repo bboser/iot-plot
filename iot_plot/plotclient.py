@@ -38,7 +38,14 @@ class PlotClient:
         self.mqtt_client.publish("exec_remote", dumps(code))
 
 
-def sample_plot():
+def main():
+    """Sample code for producing a plot.
+
+    Typically you'll run this on a small device without access to matplotlib.
+    E.g. a microcontroller with MicroPython firmware.
+
+    Start the 'plotserver' on the host computer before running executing this code.
+    """
     from mqttclient import MQTTClient
     from math import sin, cos, exp, pi
 
@@ -77,7 +84,4 @@ def sample_plot():
 
 
 if __name__ == "__main__":
-    try:
-        sample_plot()
-    except KeyboardInterrupt:
-        pass
+    main()
