@@ -9,6 +9,13 @@ pip install iot-plot
 
 This also installs `matplotlib`, if not installed already. `iot-plot` requires Python 3.
 
+To upgrade to a new version, run
+
+```
+pip install iot-plot --upgrade
+```
+
+
 ### Usage
 
 Start the server on a host (e.g.\ laptop):
