@@ -10,7 +10,7 @@ setup(
   packages = ['iot_plot'],
   version = "0.6",
   description = 'Remote plotting library',
-  long_description = 'See documentation at https://github.com/bboser/iot-plot'
+  long_description = 'See documentation at https://github.com/bboser/iot-plot',
   license = 'MIT',
   author = 'Bernhard Boser',
   author_email = 'boser@berkeley.edu',
