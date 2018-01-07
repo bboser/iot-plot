@@ -15,6 +15,6 @@ $ plotclient
 
 (and check the code) to generate
 
-![Sample plot.](example.pdf)
+![Sample plot.](example.png)
 
-In a real application you would use the PlotClient object on the microcontroller.
+In a real application you would use the `PlotClient` object on the microcontroller.
