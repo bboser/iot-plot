@@ -2,7 +2,7 @@
 
 from json import dumps
 
-class MQTTPlotter:
+class PlotClient:
 
     def __init__(self, mqtt_client):
         self.mqtt_client = mqtt_client
@@ -43,7 +43,7 @@ def sample_plot():
     from math import sin, cos, exp, pi
 
     mqtt = MQTTClient("iot.eclipse.org")
-    mp = MQTTPlotter(mqtt)
+    mp = PlotClient(mqtt)
 
     # give the series a unique name (in case you create multiple plots)
     SERIES = "sinusoid"
