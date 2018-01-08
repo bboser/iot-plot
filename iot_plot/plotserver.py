@@ -10,6 +10,13 @@ import json, pickle, os, sys
 Create malab-like plots from data submitted via MQTT.
 """
 
+DEBUG = False
+
+def dprint(*args, **kw):
+    global DEBUG
+    if DEBUG:
+        print(*args, **kw)
+
 
 class PlotServer:
 
@@ -25,8 +32,8 @@ class PlotServer:
 
     # create new series (stored as dict in self.series_)
     def new_series_(self, client, userdata, msg):
-        topic = msg.topic
         payload = json.loads(msg.payload)
+        dprint("new series, {}".format(payload))
         series = OrderedDict()
         for c in payload[1:]:
             series[c] = []
@@ -35,9 +42,9 @@ class PlotServer:
 
     # add data to series defined previously with new_series
     def data_(self, client, userdata, msg):
-        topic = msg.topic
         try:
             payload = json.loads(msg.payload)
+            dprint("data, {}".format(payload))
             series = self.series_[payload[0]]
             for i, v in enumerate(series.values()):
                 v.extend([payload[i+1]])
@@ -46,8 +53,8 @@ class PlotServer:
 
     # store series on remote in pickle format
     def save_series_(self, client, userdata, msg):
-        topic = msg.topic
         payload = json.loads(msg.payload)
+        dprint("save_series, {}".format(payload))
         series = self.series_[payload[0]]
         filename = payload[1]
         if not filename: filename = payload[0] + ".pkl"
@@ -58,9 +65,13 @@ class PlotServer:
 
     # plot series on remote
     def plot_series_(self, client, userdata, msg):
-        topic = msg.topic
         payload = json.loads(msg.payload)
-        series = self.series_[payload[0]]
+        dprint("plot_series, {}".format(payload))
+        try:
+            series = self.series_[payload[0]]
+        except KeyError:
+            print("*** plot_series: series {} not in {}".format(payload[0], self._series.keys()))
+            return
         kwargs = payload[1]
         rc('font', **{'family':'serif','serif':['Palatino']})
         rc('text', usetex=True)
