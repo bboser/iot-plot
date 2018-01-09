@@ -1,41 +1,43 @@
 #!/usr/bin/env python3
 
 from json import dumps
+import os
 
 class PlotClient:
 
-    def __init__(self, mqtt_client):
+    def __init__(self, mqtt_client, session='iot49'):
         self.mqtt_client = mqtt_client
+        self.session = session
 
-    # create a new series on remote
-    # all data of a prior series with the same name will be lost
-    # arguments:
-    #    series name (first)
-    #    column names
     def new_series(self, *args):
-        self.mqtt_client.publish("new_series", dumps(args))
+        """create a new series on remote
+        all data of a prior series with the same name will be lost
+        arguments:
+            series name (first)
+            column names
+        """
+        self.publish("new_series", args)
 
-    # add data to series on remote, use after 'new_series'
-    # arguments:
-    #    series name
-    #    column values (same number as column names submitted wiht new_series)
     def data(self, *args):
-        self.mqtt_client.publish("data", dumps(args))
+        """add data to series on remote, use after 'new_series'
+        arguments:
+            series name
+            column values (same number as column names submitted wiht new_series)
+        """
+        self.publish("data", args)
 
-    # store series on remote in pickle format
     def save_series(self, series, filename=None):
-        self.mqtt_client.publish("save_series", dumps([ series, filename ]))
+        """store series on remote in pickle format"""
+        self.publish("save_series", [ series, filename ])
 
-    # plot series on remote
     def plot_series(self, series, **kwargs):
-        self.mqtt_client.publish("plot_series", dumps([ series, kwargs ]))
+        """plot series on remote"""
+        self.publish("plot_series", [ series, kwargs ])
 
-    # evaluate python code on remote
-    # Beware: security hole!
-    # enable in plot_server if desired
-    def exec_remote(self, code):
-        print("------------ exec_remote:", code)
-        self.mqtt_client.publish("exec_remote", dumps(code))
+    def publish(self, topic, data):
+        """send data to broker"""
+        topic = os.path.join(self.session, topic)
+        self.mqtt_client.publish(topic, dumps(data))
 
 
 def main():
@@ -53,7 +55,7 @@ def main():
     mp = PlotClient(mqtt)
 
     # give the series a unique name (in case you create multiple plots)
-    SERIES = "sinusoid" 
+    SERIES = "sinusoid"
 
     # data column names
     mp.new_series(SERIES, 'time', 'cos', 'sin', 'sin*cos')
