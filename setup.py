@@ -1,14 +1,14 @@
 from setuptools import setup
-import os, sys
+import sys
 
 if sys.version_info < (3,4):
     print('iot_plot requires Python 3.4 or newer.')
     sys.exit(1)
 
 setup(
-  name = 'iot_plot',
-  packages = ['iot_plot'],
-  version = "0.6",
+  name = 'lib',
+  packages = ['lib'],
+  version = "0.6.1",
   description = 'Remote plotting library',
   long_description = 'See documentation at https://github.com/bboser/iot-plot',
   license = 'MIT',
@@ -32,8 +32,8 @@ setup(
   ],
   entry_points = {
       'console_scripts': [
-          'plotserver=iot_plot.plotserver:main',
-          'plotclient=iot_plot.plotclient:main'
+          'plotserver=lib.plotserver:main',
+          'plotclient=lib.plotclient:main'
       ],
   },
 )

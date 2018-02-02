@@ -16,26 +16,26 @@ class PlotClient:
             series name (first)
             column names
         """
-        self.publish("new_series", args)
+        self.__publish("new_series", args)
 
     def data(self, *args):
         """add data to series on remote, use after 'new_series'
         arguments:
             series name
-            column values (same number as column names submitted wiht new_series)
+            column values (same number as column names submitted with new_series)
         """
-        self.publish("data", args)
+        self.__publish("data", args)
 
     def save_series(self, series, filename=None):
         """store series on remote in pickle format"""
-        self.publish("save_series", [ series, filename ])
+        self.__publish("save_series", [ series, filename ])
 
     def plot_series(self, series, **kwargs):
         """plot series on remote"""
-        self.publish("plot_series", [ series, kwargs ])
+        self.__publish("plot_series", [ series, kwargs ])
 
-    def publish(self, topic, data):
-        """send data to broker"""
+    def __publish(self, topic, data):
+        """send data to broker, do not call from other modules"""
         topic = os.path.join(self.session, topic)
         self.mqtt_client.publish(topic, dumps(data))
 
@@ -48,7 +48,7 @@ def main():
 
     Start the 'plotserver' on the host computer before running executing this code.
     """
-    from mqttclient import MQTTClient
+    from lib.mqttclient import MQTTClient
     from math import sin, cos, exp, pi
 
     mqtt = MQTTClient("iot.eclipse.org")

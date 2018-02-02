@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from mqttclient import MQTTClient
+from lib.mqttclient import MQTTClient
 from collections import OrderedDict
 from matplotlib import rc
 import matplotlib.pyplot as plt
@@ -86,7 +86,7 @@ class PlotServer:
         fig = plt.figure(figsize=figsize)
         keys = list(series.keys())
         if len(keys) < 1:
-            print("series {} has no data to plot!".format(series_name))
+            print("series {} has no data to plot!".format(payload[0]))
             return
         if "hist" in kwargs:
             v = [0] * len(keys)
@@ -173,7 +173,7 @@ def main():
 
     # start the server
     mqtt = MQTTClient(args.broker, port=args.port)
-    server = PlotServer(mqtt, session=args.session, dir=args.dir, qos=args.qos)
+    PlotServer(mqtt, session=args.session, dir=args.dir, qos=args.qos)
 
     print("Server started ... waiting for data!")
     # blocking; see MQTTClient for non-blocking alternatives
