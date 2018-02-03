@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from json import dumps
-import os
 
 class PlotClient:
 
@@ -36,7 +35,7 @@ class PlotClient:
 
     def __publish(self, topic, data):
         """send data to broker, do not call from other modules"""
-        topic = os.path.join(self.session, topic)
+        topic = '/'.join([self.session, topic])
         self.mqtt_client.publish(topic, dumps(data))
 
 
