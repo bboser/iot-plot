@@ -32,7 +32,7 @@ class PlotServer:
         self.subscribe("plot_series", self.plot_series, qos)
 
     def subscribe(self, topic, cb, qos):
-        topic = os.path.join(self.session, topic)
+        topic = '/'.join([self.session, topic])
         self.mqtt.subscribe(topic, cb, qos)
 
     def new_series(self, client, userdata, msg):
@@ -168,7 +168,7 @@ def main():
     )
     args = parser.parse_args(sys.argv[1:])
 
-    print("Starting plotserver with MQTT broker '{}' on port {}".format(args.broker, args.port))
+    print("Starting plotserver with MQTT broker '{}' on port {} with id".format(args.broker, args.port))
     print("saving plots to '{}'".format(args.dir))
 
     # start the server

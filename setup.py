@@ -6,7 +6,7 @@ if sys.version_info < (3,4):
     sys.exit(1)
 
 setup(
-  name = 'lib',
+  name = 'iot-plot',
   packages = ['lib'],
   version = "0.6.1",
   description = 'Remote plotting library',

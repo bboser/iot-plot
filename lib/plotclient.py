@@ -17,7 +17,6 @@ class PlotClient:
         """
         self.__publish("new_series", args)
 
-    def data(self, *args):
         """add data to series on remote, use after 'new_series'
         arguments:
             series name
