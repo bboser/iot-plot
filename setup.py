@@ -2,7 +2,7 @@ from setuptools import setup
 import sys
 
 if sys.version_info < (3,4):
-    print('iot_plot requires Python 3.4 or newer.')
+    print('iot_plot requires Python 3.6 or newer.')
     sys.exit(1)
 
 setup(
