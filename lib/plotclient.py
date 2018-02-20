@@ -24,6 +24,20 @@ class PlotClient:
         """
         self.__publish("data", args)
 
+    # add data to series on remote, use after 'new_series'
+    # arguments:
+    #    series name
+    #    column values (same number as column names submitted wiht new_series)
+    def data(self, *args):
+        """add data to series on remote, call 'new_series' before this
+        Arguments:
+            series name,
+            column values (one for each name submitted in new_series)
+        Example:
+            data("my_series", val1, val2, ...)
+        """
+        self.mqtt_client.publish("data", dumps(args))
+
     def save_series(self, series, filename=None):
         """store series on remote in pickle format"""
         self.__publish("save_series", [ series, filename ])
