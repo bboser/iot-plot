@@ -15,10 +15,11 @@ To upgrade to a new version, run
 pip install iot-plot --upgrade
 ```
 
+Depending on your python installation, you may also need to install or configure a backend for the plotting to work. See instructions at the end of this document.
 
 ### Usage
 
-Start the server on a host (e.g.\ laptop):
+Start the server on a host (e.g. laptop):
 
 ```
 $ plotserver
@@ -36,16 +37,20 @@ $ plotclient
 
 In a real application you would use the `PlotClient` object on the microcontroller.
 
+### Backend
+
+The `plotserver` requires a properly installed `backend` for all features to work, e.g. generating `pdf` output. See [https://matplotlib.org/tutorials/introductory/usage.html#what-is-a-backend](https://matplotlib.org/tutorials/introductory/usage.html#what-is-a-backend) for more information.
+
 ### Error from `plotserver` on OSX:
 
 On OSX, if you get an error similar to this:
 
 ```
-**RuntimeError**: Python is not installed as a framework. 
-The Mac OS X backend will not be able to function correctly if 
-Python is not installed as a framework. See the Python 
-documentation for more information on installing Python 
-as a framework on Mac OS X. Please either reinstall Python 
+**RuntimeError**: Python is not installed as a framework.
+The Mac OS X backend will not be able to function correctly if
+Python is not installed as a framework. See the Python
+documentation for more information on installing Python
+as a framework on Mac OS X. Please either reinstall Python
 as a framework, or try one of the other backends.
 ```
 
