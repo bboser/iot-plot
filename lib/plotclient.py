@@ -90,7 +90,7 @@ def main():
         filename="example.pdf",
         xlabel="Time [s]",
         ylabel="Voltage [mV]",
-        title=r"Damped exponential decay $e^{-t} \cos(2\pi t)$")
+        title="Damped exponential decay")
 
     # wait until all data is transferred or no plot will be generated ...
     import time
