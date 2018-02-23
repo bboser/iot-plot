@@ -116,13 +116,11 @@ class PlotServer:
         dirname = os.path.dirname(filename)
         if len(dirname) > 0: os.makedirs(dirname, exist_ok=True)
         try:
+            print("saving plot of series '{}' to file '{}'".format(payload[0], filename))
             plt.savefig(filename, bbox_inches="tight")
         except FileNotFoundError as ex:
-            print("Error when generating pdf output", ex)
-            print("This is most likely caused by an improperly configured or installed graphical backend.")
-            print("See https://matplotlib.org/tutorials/introductory/usage.html#what-is-a-backend")
+            print("Error saving graphic output", ex)
         plt.close(fig)
-        print("saved plot of series '{}' to file '{}'".format(payload[0], filename))
 
 
 def main():

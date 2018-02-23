@@ -4,7 +4,7 @@ class MQTTClient:
 
     def __init__(self, broker, port=1883):
         mqtt = paho.Client()
-        mqtt.connect(broker, 1883)
+        mqtt.connect(broker, port)
         mqtt.reconnect_delay_set(min_delay=1, max_delay=120)
         self.mqtt = mqtt
 
