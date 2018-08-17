@@ -17,6 +17,12 @@ pip install iot-plot --upgrade
 
 Depending on your python installation, you may also need to install or configure a backend for the plotting to work. See instructions at the end of this document.
 
+#### LaTex
+
+Note from Jared Porter: a distribution of Latex is necessary for the matplotlib rendering.
+
+Otherwise, if run on Windows you just get a WinError 2, file not found. It isn't immediately clear from the stack trace why it is throwing this error.
+
 ### Usage
 
 Start the server on a host (e.g. laptop):
